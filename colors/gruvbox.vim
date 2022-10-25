@@ -734,13 +734,13 @@ hi! link Number GruvboxPurple
 hi! link Float GruvboxPurple
 
 " Generic type
-call s:HL('Type', s:gb.yellow, s:none, s:italic)
+call s:HL('Type', s:gb.yellow, s:none)
 " static, register, volatile, etc
 hi! link StorageClass GruvboxOrange
 " struct, union, enum, etc.
-call s:HL('Structure', s:gb.aqua, s:none, s:italic)
+call s:HL('Structure', s:gb.aqua, s:none)
 " typedef
-call s:HL('Typedef', s:gb.yellow, s:none, s:italic)
+call s:HL('Typedef', s:gb.yellow, s:none)
 
 " }}}
 " Completion Menu: {{{
