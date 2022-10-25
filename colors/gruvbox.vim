@@ -686,19 +686,19 @@ call s:HL('Todo', s:vim_fg, s:none, s:bold . s:italic)
 call s:HL('Error', s:gb.red, s:none, s:bold . s:inverse)
 
 " Generic statement
-hi! link Statement GruvboxRed
+call s:HL('Statement', s:gb.red, s:none, s:italic)
 " if, then, else, endif, switch, etc.
-hi! link Conditional GruvboxRed
+call s:HL('Conditional', s:gb.red, s:none, s:italic)
 " for, do, while, etc.
-hi! link Repeat GruvboxRed
+call s:HL('Repeat', s:gb.red, s:none, s:italic)
 " case, default, etc.
-hi! link Label GruvboxRed
+call s:HL('Label', s:gb.red, s:none)
 " try, catch, throw
-hi! link Exception GruvboxRed
+call s:HL('Exception', s:gb.red, s:none, s:italic)
 " sizeof, "+", "*", etc.
 call s:HL('Operator',  s:gb.orange, s:none, s:italicize_operators)
 " Any other keyword
-hi! link Keyword GruvboxRed
+call s:HL('Keyword', s:gb.red, s:none, s:italic)
 
 " Variable name
 hi! link Identifier GruvboxBlue
@@ -727,20 +727,20 @@ else
   call s:HL('String',  s:gb.fg1, s:gb.bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
-hi! link Boolean GruvboxPurple
+call s:HL('Boolean', s:gb.purple, s:none, s:italic)
 " Number constant: 234, 0xff
 hi! link Number GruvboxPurple
 " Floating point constant: 2.3e10
 hi! link Float GruvboxPurple
 
 " Generic type
-hi! link Type GruvboxYellow
+call s:HL('Type', s:gb.yellow, s:none, s:italic)
 " static, register, volatile, etc
 hi! link StorageClass GruvboxOrange
 " struct, union, enum, etc.
-hi! link Structure GruvboxAqua
+call s:HL('Structure', s:gb.aqua, s:none, s:italic)
 " typedef
-hi! link Typedef GruvboxYellow
+call s:HL('Typedef', s:gb.yellow, s:none, s:italic)
 
 " }}}
 " Completion Menu: {{{
