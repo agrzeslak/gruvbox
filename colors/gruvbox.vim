@@ -456,6 +456,115 @@ if exists('g:gruvbox_italicize_operators')
   endif
 endif
 
+" TODO: Setup default and resolve all
+let s:bold_nodes = [
+  'clojureRegexpCharClass',
+  'CtrlPMode1',
+  'CtrlPMode2',
+  'CtrlPStats',
+  'Error',
+  'ErrorMsg',
+  'htmlBold',
+  'htmlBoldItalic',
+  'htmlBoldUnderline',
+  'htmlBoldUnderlineItalic',
+  'markdownBold',
+  'markdownBoldItalic',
+  'MatchParen',
+  'PmenuSel',
+  'QuickFixLine',
+  'SpellCap',
+  'Todo',
+  'WildMenu',
+]
+if exists('g:gruvbox_bold_nodes')
+  let s:bold_nodes = g:gruvbox_bold_nodes
+endif
+
+" TODO: Setup default and resolve all
+let s:italic_nodes = [
+  'Folded',
+  'htmlBoldItalic',
+  'htmlBoldUnderlineItalic',
+  'htmlUnderlineItalic',
+  'htmlItalic',
+  'markdownBoldItalic',
+  'markdownItalic',
+  'SpellCap',
+  'Todo',
+]
+if exists('g:gruvbox_italic_nodes')
+  let s:italic_nodes = g:gruvbox_italic_nodes
+endif
+
+" TODO: Setup default and resolve all
+let s:undercurl_nodes = []
+if exists('g:gruvbox_undercurl_nodes')
+  let s:undercurl_nodes = g:gruvbox_undercurl_nodes
+endif
+
+" TODO: Setup default and resolve all
+let s:underline_nodes = [
+  'htmlBoldUnderline',
+  'htmlBoldUnderlineItalic',
+  'htmlLink',
+  'htmlUnderline',
+  'htmlUnderlineItalic',
+  'markdownLinkText',
+  'Underlined',
+]
+if exists('g:gruvbox_underline_nodes')
+  let s:underline_nodes = g:gruvbox_underline_nodes
+endif
+
+" TODO: Setup default and resolve all
+let s:inverse_nodes = [
+  'Cursor',
+  'DiffAdd',
+  'DiffChange',
+  'DiffDeleted',
+  'DiffText',
+  'Error',
+  'IncSearch',
+  'multiple_cursors_cursor',
+  'Search',
+  'StatusLine',
+  'StatusLineNC',
+]
+if exists('g:gruvbox_inverse_nodes')
+  let s:inverse_nodes = g:gruvbox_inverse_nodes
+endif
+
+function! s:ResolveEmphasis(group)
+  let emstr = ""
+
+  if index(s:bold_nodes, a:group) >= 0
+    let emstr .= s:bold
+  endif
+
+  if index(s:italic_nodes, a:group) >= 0
+    let emstr .= s:italic
+  endif
+
+  if index(s:undercurl_nodes, a:group) >= 0
+    let emstr .= s:undercurl
+  endif
+
+  if index(s:underline_nodes, a:group) >= 0
+    let emstr .= s:underline
+  endif
+
+  if index(s:inverse_nodes, a:group) >= 0
+    let emstr .= s:inverse
+  endif
+
+  if emstr == ""
+    let emstr = "NONE,"
+  endif
+
+  return emstr
+endfunction
+
 " }}}
 " Highlighting Function: {{{
 
@@ -476,7 +585,7 @@ function! s:HL(group, fg, ...)
   if a:0 >= 2 && strlen(a:2)
     let emstr = a:2
   else
-    let emstr = 'NONE,'
+    let emstr = s:ResolveEmphasis(a:group)
   endif
 
   " special fallback
@@ -593,7 +702,7 @@ if version >= 700
   hi! link TabLine TabLineFill
 
   " Match paired bracket under the cursor
-  call s:HL('MatchParen', s:none, s:gb.bg3, s:bold)
+  call s:HL('MatchParen', s:none, s:gb.bg3)
 endif
 
 if version >= 703
@@ -613,21 +722,21 @@ hi! link SpecialKey GruvboxFg4
 call s:HL('Visual',    s:none,  s:gb.bg3, s:invert_selection)
 hi! link VisualNOS Visual
 
-call s:HL('Search', s:hls_highlight, s:gb.bg0, s:inverse)
-call s:HL('IncSearch', s:hls_cursor, s:gb.bg0, s:inverse)
+call s:HL('Search', s:hls_highlight, s:gb.bg0)
+call s:HL('IncSearch', s:hls_cursor, s:gb.bg0)
 
-call s:HL('QuickFixLine', s:gb.bg0, s:gb.yellow, s:bold)
+call s:HL('QuickFixLine', s:gb.bg0, s:gb.yellow)
 
-call s:HL('Underlined', s:gb.blue, s:none, s:underline)
+call s:HL('Underlined', s:gb.blue, s:none)
 
-call s:HL('StatusLine',   s:gb.bg2, s:gb.fg1, s:inverse)
-call s:HL('StatusLineNC', s:gb.bg1, s:gb.fg4, s:inverse)
+call s:HL('StatusLine',   s:gb.bg2, s:gb.fg1)
+call s:HL('StatusLineNC', s:gb.bg1, s:gb.fg4)
 
 " The column separating vertically split windows
 call s:HL('VertSplit', s:gb.bg3, s:vert_split)
 
 " Current match in wildmenu completion
-call s:HL('WildMenu', s:gb.blue, s:gb.bg2, s:bold)
+call s:HL('WildMenu', s:gb.blue, s:gb.bg2)
 
 " Directory names, special names in listing
 hi! link Directory GruvboxGreenBold
@@ -636,7 +745,7 @@ hi! link Directory GruvboxGreenBold
 hi! link Title GruvboxGreenBold
 
 " Error messages on the command line
-call s:HL('ErrorMsg',   s:gb.bg0, s:gb.red, s:bold)
+call s:HL('ErrorMsg', s:gb.bg0, s:gb.red)
 " More prompt: -- More --
 hi! link MoreMsg GruvboxYellowBold
 " Current mode message: -- INSERT --
@@ -656,7 +765,7 @@ call s:HL('LineNr', s:gb.bg4, s:number_column)
 call s:HL('SignColumn', s:none, s:sign_column)
 
 " Line used for closed folds
-call s:HL('Folded', s:gb.gray, s:gb.bg1, s:italic)
+call s:HL('Folded', s:gb.gray, s:gb.bg1)
 " Column where folds are displayed
 call s:HL('FoldColumn', s:gb.gray, s:gb.bg1)
 
@@ -664,7 +773,7 @@ call s:HL('FoldColumn', s:gb.gray, s:gb.bg1)
 " Cursor: {{{
 
 " Character under cursor
-call s:HL('Cursor', s:none, s:none, s:inverse)
+call s:HL('Cursor', s:none, s:none)
 " Visual mode cursor, selection
 hi! link vCursor Cursor
 " Input moder cursor
@@ -682,44 +791,47 @@ else
 endif
 
 call s:HL('Comment', s:gb.gray, s:none, s:italicize_comments)
-call s:HL('Todo', s:vim_fg, s:none, s:bold . s:italic)
-call s:HL('Error', s:gb.red, s:none, s:bold . s:inverse)
+" TODO: italic
+call s:HL('Todo', s:vim_fg, s:none)
+" TODO: inverse
+call s:HL('Error', s:gb.red, s:none)
 
 " Generic statement
-hi! link Statement GruvboxRed
+call s:HL('Statement', s:gb.red, s:none)
 " if, then, else, endif, switch, etc.
-hi! link Conditional GruvboxRed
+call s:HL('Conditional', s:gb.red, s:none)
 " for, do, while, etc.
-hi! link Repeat GruvboxRed
+call s:HL('Repeat', s:gb.red, s:none)
 " case, default, etc.
-hi! link Label GruvboxRed
+call s:HL('Label', s:gb.red, s:none)
 " try, catch, throw
-hi! link Exception GruvboxRed
+call s:HL('Exception', s:gb.red, s:none)
 " sizeof, "+", "*", etc.
-call s:HL('Operator',  s:gb.orange, s:none, s:italicize_operators)
+call s:HL('Operator',  s:gb.orange, s:none)
 " Any other keyword
-hi! link Keyword GruvboxRed
+call s:HL('Keyword', s:gb.red, s:none)
 
 " Variable name
-hi! link Identifier GruvboxBlue
+call s:HL('Identifier', s:gb.blue, s:none)
 " Function name
-hi! link Function GruvboxGreenBold
+" TODO: BOLD
+call s:HL('Function', s:gb.green, s:none)
 
 " Generic preprocessor
-hi! link PreProc GruvboxAqua
+call s:HL('PreProc', s:gb.aqua, s:none)
 " Preprocessor #include
-hi! link Include GruvboxAqua
+call s:HL('Include', s:gb.aqua, s:none)
 " Preprocessor #define
-hi! link Define GruvboxAqua
+call s:HL('Define', s:gb.aqua, s:none)
 " Same as Define
-hi! link Macro GruvboxAqua
+call s:HL('Macro', s:gb.aqua, s:none)
 " Preprocessor #if, #else, #endif, etc.
-hi! link PreCondit GruvboxAqua
+call s:HL('PreCondit', s:gb.aqua, s:none)
 
 " Generic constant
-hi! link Constant GruvboxPurple
+call s:HL('Constant', s:gb.purple, s:none)
 " Character constant: 'c', '/n'
-hi! link Character GruvboxPurple
+call s:HL('Character', s:gb.purple, s:none)
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
   call s:HL('String',  s:gb.green, s:none, s:italicize_strings)
@@ -727,20 +839,21 @@ else
   call s:HL('String',  s:gb.fg1, s:gb.bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
-hi! link Boolean GruvboxPurple
+call s:HL('Boolean', s:gb.purple, s:none)
 " Number constant: 234, 0xff
-hi! link Number GruvboxPurple
+call s:HL('Number', s:gb.purple, s:none)
 " Floating point constant: 2.3e10
-hi! link Float GruvboxPurple
+call s:HL('Float', s:gb.purple, s:none)
 
 " Generic type
-hi! link Type GruvboxYellow
+call s:HL('Type', s:gb.yellow, s:none)
 " static, register, volatile, etc
-hi! link StorageClass GruvboxOrange
+call s:HL('StorageClass', s:gb.orange, s:none)
 " struct, union, enum, etc.
-hi! link Structure GruvboxAqua
+call s:HL('Structure', s:gb.aqua, s:none)
 " typedef
-hi! link Typedef GruvboxYellow
+hi! link Typedef GruvboxYello
+call s:HL('Typedef', s:gb.yellow, s:none)
 
 " }}}
 " Completion Menu: {{{
@@ -749,7 +862,7 @@ if version >= 700
   " Popup menu: normal item
   call s:HL('Pmenu', s:gb.fg1, s:gb.bg2)
   " Popup menu: selected item
-  call s:HL('PmenuSel', s:gb.bg2, s:gb.blue, s:bold)
+  call s:HL('PmenuSel', s:gb.bg2, s:gb.blue)
   " Popup menu: scrollbar
   call s:HL('PmenuSbar', s:none, s:gb.bg2)
   " Popup menu: scrollbar thumb
@@ -759,14 +872,14 @@ endif
 " }}}
 " Diffs: {{{
 
-call s:HL('DiffDelete', s:gb.red, s:gb.bg0, s:inverse)
-call s:HL('DiffAdd',    s:gb.green, s:gb.bg0, s:inverse)
+call s:HL('DiffDelete', s:gb.red, s:gb.bg0)
+call s:HL('DiffAdd',    s:gb.green, s:gb.bg0)
 "call s:HL('DiffChange', s:gb.bg0, s:gb.blue)
 "call s:HL('DiffText',   s:gb.bg0, s:gb.yellow)
 
 " Alternative setting
-call s:HL('DiffChange', s:gb.aqua, s:gb.bg0, s:inverse)
-call s:HL('DiffText',   s:gb.yellow, s:gb.bg0, s:inverse)
+call s:HL('DiffChange', s:gb.aqua, s:gb.bg0)
+call s:HL('DiffText',   s:gb.yellow, s:gb.bg0)
 
 " }}}
 " Spelling: {{{
@@ -776,7 +889,7 @@ if has("spell")
   if g:gruvbox_improved_warnings == 0
     hi! link SpellCap GruvboxBlueUnderline
   else
-    call s:HL('SpellCap',   s:gb.green, s:none, s:bold . s:italic)
+    call s:HL('SpellCap', s:gb.green, s:none)
   endif
   " Not recognized word
   hi! link SpellBad GruvboxRedUnderline
@@ -974,9 +1087,9 @@ hi! link CtrlPPrtBase GruvboxBg2
 hi! link CtrlPPrtCursor GruvboxBlue
 hi! link CtrlPLinePre GruvboxBg2
 
-call s:HL('CtrlPMode1', s:gb.blue, s:gb.bg2, s:bold)
-call s:HL('CtrlPMode2', s:gb.bg0, s:gb.blue, s:bold)
-call s:HL('CtrlPStats', s:gb.fg4, s:gb.bg2, s:bold)
+call s:HL('CtrlPMode1', s:gb.blue, s:gb.bg2)
+call s:HL('CtrlPMode2', s:gb.bg0, s:gb.blue)
+call s:HL('CtrlPStats', s:gb.fg4, s:gb.bg2)
 
 " }}}
 " FZF: {{{
@@ -1088,7 +1201,7 @@ hi! link NERDTreeToggleOff GruvboxRed
 " }}}
 " Vim Multiple Cursors: {{{
 
-call s:HL('multiple_cursors_cursor', s:none, s:none, s:inverse)
+call s:HL('multiple_cursors_cursor', s:none, s:none)
 call s:HL('multiple_cursors_visual', s:none, s:gb.bg2)
 
 " }}}
@@ -1186,18 +1299,18 @@ hi! link htmlArg GruvboxOrange
 hi! link htmlTagN GruvboxFg1
 hi! link htmlSpecialTagName GruvboxBlue
 
-call s:HL('htmlLink', s:gb.fg4, s:none, s:underline)
+call s:HL('htmlLink', s:gb.fg4, s:none)
 
 hi! link htmlSpecialChar GruvboxRed
 
-call s:HL('htmlBold', s:vim_fg, s:vim_bg, s:bold)
-call s:HL('htmlBoldUnderline', s:vim_fg, s:vim_bg, s:bold . s:underline)
-call s:HL('htmlBoldItalic', s:vim_fg, s:vim_bg, s:bold . s:italic)
-call s:HL('htmlBoldUnderlineItalic', s:vim_fg, s:vim_bg, s:bold . s:underline . s:italic)
+call s:HL('htmlBold', s:vim_fg, s:vim_bg)
+call s:HL('htmlBoldUnderline', s:vim_fg, s:vim_bg)
+call s:HL('htmlBoldItalic', s:vim_fg, s:vim_bg)
+call s:HL('htmlBoldUnderlineItalic', s:vim_fg, s:vim_bg)
 
-call s:HL('htmlUnderline', s:vim_fg, s:vim_bg, s:underline)
-call s:HL('htmlUnderlineItalic', s:vim_fg, s:vim_bg, s:underline . s:italic)
-call s:HL('htmlItalic', s:vim_fg, s:vim_bg, s:italic)
+call s:HL('htmlUnderline', s:vim_fg, s:vim_bg)
+call s:HL('htmlUnderlineItalic', s:vim_fg, s:vim_bg)
+call s:HL('htmlItalic', s:vim_fg, s:vim_bg)
 
 " }}}
 " Xml: {{{
@@ -1252,7 +1365,7 @@ hi! link clojureException GruvboxRed
 
 hi! link clojureRegexp GruvboxAqua
 hi! link clojureRegexpEscape GruvboxAqua
-call s:HL('clojureRegexpCharClass', s:gb.fg3, s:none, s:bold)
+call s:HL('clojureRegexpCharClass', s:gb.fg3, s:none)
 hi! link clojureRegexpMod clojureRegexpCharClass
 hi! link clojureRegexpQuantifier clojureRegexpCharClass
 
@@ -1587,9 +1700,9 @@ hi! link scalaInterpolation GruvboxAqua
 " }}}
 " Markdown: {{{
 
-call s:HL('markdownItalic', s:fg3, s:none, s:italic)
-call s:HL('markdownBold', s:fg3, s:none, s:bold)
-call s:HL('markdownBoldItalic', s:fg3, s:none, s:bold . s:italic)
+call s:HL('markdownItalic', s:fg3, s:none)
+call s:HL('markdownBold', s:fg3, s:none)
+call s:HL('markdownBoldItalic', s:fg3, s:none)
 
 hi! link markdownH1 GruvboxGreenBold
 hi! link markdownH2 GruvboxGreenBold
@@ -1616,7 +1729,7 @@ hi! link markdownHeadingDelimiter GruvboxOrange
 hi! link markdownUrl GruvboxPurple
 hi! link markdownUrlTitleDelimiter GruvboxGreen
 
-call s:HL('markdownLinkText', s:gray, s:none, s:underline)
+call s:HL('markdownLinkText', s:gray, s:none)
 hi! link markdownIdDeclaration markdownLinkText
 
 " }}}
