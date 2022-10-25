@@ -1162,6 +1162,11 @@ hi! link DashboardCenterIcon GruvboxAqua
 hi! link DashboardShortCut GruvboxBlue
 hi! link DashboardFooter GruvboxPurple
 " }}}
+" vim-illuminate: {{{
+call s:HL('IlluminatedWordText', s:none, s:gb.bg1)
+call s:HL('IlluminatedWordRead', s:none, s:gb.bg1)
+call s:HL('IlluminatedWordWrite', s:none, s:gb.bg1)
+" }}}
 " Filetype specific -----------------------------------------------------------
 " Diff: {{{
 
