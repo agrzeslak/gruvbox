@@ -633,10 +633,10 @@ call s:HL('WildMenu', s:gb.blue, s:gb.bg2, s:bold)
 hi! link Directory GruvboxGreenBold
 
 " Titles for output from :set all, :autocmd, etc.
-hi! link Title GruvboxGreenBold
+hi! link Title GruvboxRedBold
 
 " Error messages on the command line
-call s:HL('ErrorMsg',   s:gb.bg0, s:gb.red, s:bold)
+call s:HL('ErrorMsg', s:gb.bg0, s:gb.red, s:bold)
 " More prompt: -- More --
 hi! link MoreMsg GruvboxYellowBold
 " Current mode message: -- INSERT --
@@ -755,6 +755,14 @@ if version >= 700
   " Popup menu: scrollbar thumb
   call s:HL('PmenuThumb', s:none, s:gb.bg4)
 endif
+
+" Different colours for different heading levels (6 appears to be max)
+call s:HL('@text.title.1', s:gb.red)
+call s:HL('@text.title.2', s:gb.orange)
+call s:HL('@text.title.3', s:gb.yellow)
+call s:HL('@text.title.4', s:gb.green)
+call s:HL('@text.title.5', s:gb.aqua)
+call s:HL('@text.title.6', s:gb.blue)
 
 " }}}
 " Diffs: {{{
