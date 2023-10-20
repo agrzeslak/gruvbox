@@ -681,7 +681,7 @@ else
   call s:HL('Special', s:gb.orange, s:gb.bg1, s:italicize_strings)
 endif
 
-call s:HL('Comment', s:gb.orange, s:none, s:italicize_comments)
+call s:HL('Comment', s:gb.aqua, s:none, s:italicize_comments)
 call s:HL('Todo', s:vim_fg, s:none, s:bold . s:italic)
 call s:HL('Error', s:gb.red, s:none, s:bold . s:inverse)
 
@@ -717,12 +717,12 @@ hi! link Macro GruvboxAqua
 hi! link PreCondit GruvboxAqua
 
 " Generic constant
-hi! link Constant GruvboxAqua
+hi! link Constant GruvboxPurple
 " Character constant: 'c', '/n'
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:gb.green, s:none, s:italicize_strings)
+  call s:HL('String',  s:gb.blue, s:none, s:italicize_strings)
 else
   call s:HL('String',  s:gb.fg1, s:gb.bg1, s:italicize_strings)
 endif
