@@ -701,9 +701,9 @@ call s:HL('Operator',  s:gb.orange, s:none, s:italicize_operators)
 call s:HL('Keyword', s:gb.red, s:none, s:italic)
 
 " Variable name
-hi! link Identifier GruvboxBlue
+hi! link Identifier GruvboxFg1
 " Function name
-hi! link Function GruvboxGreen
+hi! link Function GruvboxBlue
 
 " Generic preprocessor
 hi! link PreProc GruvboxAqua
@@ -717,7 +717,7 @@ hi! link Macro GruvboxAqua
 hi! link PreCondit GruvboxAqua
 
 " Generic constant
-hi! link Constant GruvboxPurple
+hi! link Constant GruvboxAqua
 " Character constant: 'c', '/n'
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
@@ -738,7 +738,7 @@ call s:HL('Type', s:gb.yellow, s:none)
 " static, register, volatile, etc
 hi! link StorageClass GruvboxOrange
 " struct, union, enum, etc.
-call s:HL('Structure', s:gb.aqua, s:none)
+call s:HL('Structure', s:gb.yellow, s:none)
 " typedef
 call s:HL('Typedef', s:gb.yellow, s:none)
 
@@ -766,6 +766,13 @@ call s:HL('@text.title.6', s:gb.blue, s:none, s:bold)
 
 call s:HL('@text.strong', s:gb.yellow, s:none, s:bold)
 call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
+
+call s:HL('@type', s:gb.yellow)
+call s:HL('@type.builtin', s:gb.yellow)
+call s:HL('@variable', s:gb.fg1)
+call s:HL('@parameter', s:gb.fg1)
+call s:HL('@field', s:gb.fg1)
+call s:HL('@function', s:gb.blue)
 
 " }}}
 " Diffs: {{{
@@ -1715,14 +1722,14 @@ hi! link csInterpolationFormatDel GruvboxAquaBold
 " }}}
 " Rust: {{{
 
-hi! link rustSigil GruvboxOrange
-hi! link rustEscape GruvboxAqua
-hi! link rustStringContinuation GruvboxAqua
-hi! link rustEnum GruvboxAqua
-hi! link rustStructure GruvboxAqua
-hi! link rustModPathSep GruvboxFg2
-hi! link rustCommentLineDoc Comment
-hi! link rustDefault GruvboxAqua
+" hi! link rustSigil GruvboxOrange
+" hi! link rustEscape GruvboxAqua
+" hi! link rustStringContinuation GruvboxAqua
+" hi! link rustEnum GruvboxAqua
+" hi! link rustStructure GruvboxAqua
+" hi! link rustModPathSep GruvboxFg2
+" hi! link rustCommentLineDoc Comment
+" hi! link rustDefault GruvboxAqua
 
 " }}}
 " Ocaml: {{{
