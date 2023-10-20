@@ -703,7 +703,7 @@ call s:HL('Keyword', s:gb.red, s:none, s:italic)
 " Variable name
 hi! link Identifier GruvboxBlue
 " Function name
-hi! link Function GruvboxGreenBold
+hi! link Function GruvboxGreen
 
 " Generic preprocessor
 hi! link PreProc GruvboxAqua
@@ -757,12 +757,15 @@ if version >= 700
 endif
 
 " Different colours for different heading levels (6 appears to be max)
-call s:HL('@text.title.1', s:gb.red)
-call s:HL('@text.title.2', s:gb.orange)
-call s:HL('@text.title.3', s:gb.yellow)
-call s:HL('@text.title.4', s:gb.green)
-call s:HL('@text.title.5', s:gb.aqua)
-call s:HL('@text.title.6', s:gb.blue)
+call s:HL('@text.title.1', s:gb.red, s:none, s:bold)
+call s:HL('@text.title.2', s:gb.orange, s:none, s:bold)
+call s:HL('@text.title.3', s:gb.yellow, s:none, s:bold)
+call s:HL('@text.title.4', s:gb.green, s:none, s:bold)
+call s:HL('@text.title.5', s:gb.aqua, s:none, s:bold)
+call s:HL('@text.title.6', s:gb.blue, s:none, s:bold)
+
+call s:HL('@text.strong', s:gb.yellow, s:none, s:bold)
+call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
 
 " }}}
 " Diffs: {{{
