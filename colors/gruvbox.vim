@@ -722,7 +722,7 @@ hi! link Constant GruvboxPurple
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:gb.blue, s:none, s:italicize_strings)
+  call s:HL('String',  s:gb.green, s:none, s:italicize_strings)
 else
   call s:HL('String',  s:gb.fg1, s:gb.bg1, s:italicize_strings)
 endif
