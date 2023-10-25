@@ -699,6 +699,8 @@ call s:HL('Exception', s:gb.red, s:none, s:italic)
 call s:HL('Operator',  s:gb.orange, s:none, s:italicize_operators)
 " Any other keyword
 call s:HL('Keyword', s:gb.red, s:none, s:italic)
+" Diagnostics
+call s:HL('DiagnosticUnnecessary', s:none)
 
 " Variable name
 hi! link Identifier GruvboxFg1
@@ -770,8 +772,9 @@ call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
 call s:HL('@field', s:gb.fg1)
 call s:HL('@function', s:gb.blue)
 call s:HL('@include', s:gb.red, s:none, s:italic)
+call s:HL('@namespace', s:yellow)
 call s:HL('@parameter', s:gb.fg1)
-call s:HL('@storageclass', s:gb.red, s:none, s:italic)
+call s:HL('@type.qualifier', s:gb.red, s:none, s:italic)
 call s:HL('@string.documentation', s:gb.aqua)
 call s:HL('@type', s:gb.yellow)
 call s:HL('@type.builtin', s:gb.yellow)
