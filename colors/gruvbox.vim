@@ -767,13 +767,14 @@ call s:HL('@text.title.6', s:gb.blue, s:none, s:bold)
 call s:HL('@text.strong', s:gb.yellow, s:none, s:bold)
 call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
 
+call s:HL('@field', s:gb.fg1)
+call s:HL('@function', s:gb.blue)
+call s:HL('@parameter', s:gb.fg1)
+call s:HL('@storageclass', s:gb.red, s:none, s:italic)
+call s:HL('@string.documentation', s:gb.aqua)
 call s:HL('@type', s:gb.yellow)
 call s:HL('@type.builtin', s:gb.yellow)
 call s:HL('@variable', s:gb.fg1)
-call s:HL('@parameter', s:gb.fg1)
-call s:HL('@field', s:gb.fg1)
-call s:HL('@function', s:gb.blue)
-call s:HL('@string.documentation', s:gb.aqua)
 
 " }}}
 " Diffs: {{{
