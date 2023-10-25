@@ -769,6 +769,7 @@ call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
 
 call s:HL('@field', s:gb.fg1)
 call s:HL('@function', s:gb.blue)
+call s:HL('@include', s:gb.red, s:none, s:italic)
 call s:HL('@parameter', s:gb.fg1)
 call s:HL('@storageclass', s:gb.red, s:none, s:italic)
 call s:HL('@string.documentation', s:gb.aqua)
