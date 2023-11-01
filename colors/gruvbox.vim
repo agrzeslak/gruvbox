@@ -769,6 +769,7 @@ call s:HL('@text.title.6', s:gb.blue, s:none, s:bold)
 call s:HL('@text.strong', s:gb.yellow, s:none, s:bold)
 call s:HL('@text.emphasis', s:gb.yellow, s:none, s:italic)
 
+call s:HL('@attribute', s:gb.purple)
 call s:HL('@field', s:gb.fg1)
 call s:HL('@function', s:gb.blue)
 call s:HL('@include', s:gb.red, s:none, s:italic)
