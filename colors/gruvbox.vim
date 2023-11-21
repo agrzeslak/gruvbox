@@ -724,9 +724,9 @@ hi! link Constant GruvboxPurple
 hi! link Character GruvboxPurple
 " String constant: "this is a string"
 if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:gb.green, s:none, s:italicize_strings)
+  call s:HL('String', s:gb.green, s:none, s:italicize_strings)
 else
-  call s:HL('String',  s:gb.fg1, s:gb.bg1, s:italicize_strings)
+  call s:HL('String', s:gb.fg1, s:gb.bg1, s:italicize_strings)
 endif
 " Boolean constant: TRUE, false
 call s:HL('Boolean', s:gb.purple, s:none, s:italic)
@@ -773,6 +773,7 @@ call s:HL('@attribute', s:gb.purple)
 call s:HL('@field', s:gb.fg1)
 call s:HL('@function', s:gb.blue)
 call s:HL('@include', s:gb.red, s:none, s:italic)
+call s:HL('@keyword', s:gb.red, s:none, s:italic)
 call s:HL('@namespace', s:yellow)
 call s:HL('@parameter', s:gb.fg1)
 call s:HL('@type.qualifier', s:gb.red, s:none, s:italic)
